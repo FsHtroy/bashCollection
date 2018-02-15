@@ -132,9 +132,11 @@ command=python /usr/local/shadowsocks/server.py
 autorestart=true
 autostart=true
 user=shadowsocks" > /etc/supervisor/config.d/shadowsocks.ini
+	service supervisor restart
 }
 
 echo -e "1.normal install(No supervisor)"
+echo -e "2.install supervisor and shadowsocks server"
 read -p "Your choice:" function
 
 while [[ ! "${function}" =~ ^[1-2]$ ]]
