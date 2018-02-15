@@ -100,7 +100,7 @@ MANAGE_PORT = 23333
 install_supervisor() {
 	cd ~/manyuser_install
 	wget https://raw.githubusercontent.com/FsHtroy/bashCollection/master/Htroy/installsupervisor.sh
-	bash installsupervisor.sh nopip ${web} ${web_user} ${web_pw}
+	bash installsupervisor.sh installed ${web} ${web_user} ${web_pw}
 }
 
 normal_install() {
