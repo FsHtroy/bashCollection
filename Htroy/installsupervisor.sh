@@ -37,7 +37,7 @@ set_supervisor_config() {
 	wget https://raw.githubusercontent.com/FsHtroy/bashCollection/master/Htroy/supervisor/supervisord.conf
 	mv supervisord.conf /etc/supervisor/supervisord.conf
 	if [[ "${web}" != "n" ]]; then
-		echo -e "[inet_http_server]
+		echo -e "\n[inet_http_server]
 port=0.0.0.0:9001
 username=${user}
 password=${password}" >> /etc/supervisor/supervisord.conf
@@ -69,3 +69,4 @@ install() {
 	set_service
 }
 install
+echo -e "Finish install supervisor"
