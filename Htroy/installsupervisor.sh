@@ -21,7 +21,7 @@ check_root() {
 }
 
 install_pip() {
-	if [[ "${pip}" != "installed"]]; then
+	if [[ "${pip}" != "installed" ]]; then
 		wget https://bootstrap.pypa.io/get-pip.py
 		python get-pip.py
 	fi
