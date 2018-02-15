@@ -125,6 +125,13 @@ with_supervisor_install() {
 	fi
 	normal_install
 	install_supervisor
+	useradd -M -s /sbin/nologin shadowsocks
+	touch /etc/supervisor/config.d/shadowsocks.ini
+	echo -e "[program:shadowsocks]
+command=python /usr/local/shadowsocks/server.py
+autorestart=true
+autostart=true
+user=shadowsocks" > /etc/supervisor/config.d/shadowsocks.ini
 }
 
 echo -e "1.normal install(No supervisor)"
