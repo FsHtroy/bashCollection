@@ -18,10 +18,10 @@ prepare() {
 	yum update -y
 	yum install wget screen git net-tools -y
 	yum groupinstall "Development tools" -y
+	mkdir ~/manyuser_install
+	cd ~/manyuser_install
 	wget https://bootstrap.pypa.io/get-pip.py
 	python get-pip.py
-	mkdir manyuser_install
-	cd manyuser_install
 }
 
 install_libsodium() {
@@ -46,8 +46,7 @@ get_server() {
 }
 
 set_config() {
-	echo -e "
-# Config
+	echo -e "# Config
 NODE_ID = ${nodeid}
 
 
@@ -97,6 +96,12 @@ MANAGE_PORT = 23333
 " > userapiconfig.py
 }
 
+install_supervisor() {
+	cd ~/manyuser_install
+	wget https://raw.githubusercontent.com/FsHtroy/bashCollection/master/Htroy/installsupervisor.sh
+	bash installsupervisor.sh nopip ${web} ${web_user} ${web_pw}
+}
+
 normal_install() {
 	read -p "Your nodeid:" nodeid
 	read -p "Your mukey:" mukey
@@ -108,10 +113,23 @@ normal_install() {
 	set_config
 }
 
+with_supervisor_install() {
+	read -p "Open supervisor web?(y or n)" web
+	if [[ "${web}" == "y"]]; then
+		read -p "Your web user name:" web_user
+		read -p "Your web user password:" web_pw
+	else
+		web_user=""
+		web_pw=""
+	fi
+	normal_install
+	install_supervisor
+}
+
 echo -e "1.normal install(No supervisor)"
 read -p "Your choice:" function
 
-while [[ ! "${function}" =~ ^[1-1]$ ]]
+while [[ ! "${function}" =~ ^[1-2]$ ]]
 	do
 		echo -e "Error!"
 		read -p "Your choice:" function
@@ -120,7 +138,6 @@ while [[ ! "${function}" =~ ^[1-1]$ ]]
 if [[ "${function}" == "1" ]]; then
 	normal_install
 elif [[ "${function}" == "2" ]]; then
-	status
-else
-	uninstall
+	with_supervisor_install
 fi
+echo -e "Finish!"
