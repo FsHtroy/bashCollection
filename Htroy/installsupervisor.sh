@@ -36,11 +36,11 @@ pip_install_supervisor() {
 set_supervisor_config() {
 	wget https://raw.githubusercontent.com/FsHtroy/bashCollection/master/Htroy/supervisor/supervisord.conf
 	mv supervisord.conf /etc/supervisor/supervisord.conf
-	if [[ "${web}" != "n"]]; then
+	if [[ "${web}" != "n" ]]; then
 		echo -e "[inet_http_server]
 port=0.0.0.0:9001
 username=${user}
-password=${password}" > /etc/supervisor/supervisord.conf
+password=${password}" >> /etc/supervisor/supervisord.conf
 	fi
 }
 
