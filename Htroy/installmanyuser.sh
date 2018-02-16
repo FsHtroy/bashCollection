@@ -116,7 +116,7 @@ normal_install() {
 
 with_supervisor_install() {
 	read -p "Open supervisor web?(y or n)" web
-	if [[ "${web}" == "y"]]; then
+	if [[ "${web}" == "y" ]]; then
 		read -p "Your web user name:" web_user
 		read -p "Your web user password:" web_pw
 	else
