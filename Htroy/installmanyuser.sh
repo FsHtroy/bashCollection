@@ -131,7 +131,8 @@ with_supervisor_install() {
 command=python /usr/local/shadowsocks/server.py
 autorestart=true
 autostart=true
-user=shadowsocks" > /etc/supervisor/config.d/shadowsocks.ini
+user=shadowsocks
+redirect_stderr=true" > /etc/supervisor/config.d/shadowsocks.ini
 	service supervisor restart
 }
 
