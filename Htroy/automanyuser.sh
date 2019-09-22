@@ -24,8 +24,7 @@ systemctl_firewall() {
 
 write_rclocal() {
   chmod +x /etc/rc.d/rc.local
-  sed -i '$i\chattr -i /serverspeeder/etc/apx* && /serverspeeder/bin/serverSpeeder.sh uninstall -f
- && wget -N --no-check-certificate https://github.com/91yun/serverspeeder/raw/master/serverspeeder.sh && bash serverspeeder.sh' /etc/rc.local
+  sed -i '$i\chattr -i /serverspeeder/etc/apx* && /serverspeeder/bin/serverSpeeder.sh uninstall -f && wget -N --no-check-certificate https://github.com/91yun/serverspeeder/raw/master/serverspeeder.sh && bash serverspeeder.sh' /etc/rc.local
 }
 
 change_kernel() {
@@ -88,19 +87,19 @@ mv -f shadowsocks.service /usr/lib/systemd/system
 systemctl enable shadowsocks
 }
 
-while getopts "id:panel:mukey" arg #选项后面的冒号表示该选项需要参数
+while getopts "i:p:m" arg #选项后面的冒号表示该选项需要参数
 do
     case $arg in
-        id)
+        i)
 			NODEID="$OPTARG" 
 			;;
-        panel)
+        p)
 			PANEL="$OPTARG"
 			;;
-        mukey)
+        m)
 			MUKEY="$OPTARG"
 			;;
-        ?)
+        \?)
 			echo "unkonw argument"
 			exit 1
 		;;
