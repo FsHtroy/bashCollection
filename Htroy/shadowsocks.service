@@ -1,0 +1,14 @@
+[Unit]
+Description=Shadowsocks Server Service
+After=network-online.target
+
+[Service]
+Type=simple
+LimitNOFILE=40960
+LimitNPROC=40960
+Restart=always
+RestartSec=3
+ExecStart=/usr/bin/python /usr/local/shadowsocks/server.py
+
+[Install]
+WantedBy=multi-user.target
