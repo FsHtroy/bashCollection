@@ -85,9 +85,10 @@ MANAGE_PORT = 23333
 wget https://github.com/FsHtroy/bashCollection/raw/master/Htroy/shadowsocks.service
 mv -f shadowsocks.service /usr/lib/systemd/system
 systemctl enable shadowsocks
+reboot
 }
 
-while getopts "i:p:m" arg #选项后面的冒号表示该选项需要参数
+while getopts "i:p:m:" arg #选项后面的冒号表示该选项需要参数
 do
     case $arg in
         i)
