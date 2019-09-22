@@ -24,7 +24,7 @@ systemctl_firewall() {
 
 write_rclocal() {
   chmod +x /etc/rc.d/rc.local
-  sed -i '$i\chattr -i /serverspeeder/etc/apx* && /serverspeeder/bin/serverSpeeder.sh uninstall -f && wget -N --no-check-certificate https://github.com/91yun/serverspeeder/raw/master/serverspeeder.sh && bash serverspeeder.sh' /etc/rc.local
+  sed -i '$i\chattr -i /serverspeeder/etc/apx* && /serverspeeder/bin/serverSpeeder.sh uninstall -f\nwget -N --no-check-certificate https://github.com/91yun/serverspeeder/raw/master/serverspeeder.sh && bash serverspeeder.sh' /etc/rc.local
 }
 
 change_kernel() {
@@ -84,6 +84,7 @@ MANAGE_PORT = 23333
 wget https://github.com/FsHtroy/bashCollection/raw/master/Htroy/shadowsocks.service
 mv -f shadowsocks.service /usr/lib/systemd/system
 systemctl enable shadowsocks
+rm -rf /automanyuser.sh
 reboot
 }
 
