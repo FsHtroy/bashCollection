@@ -84,7 +84,6 @@ MANAGE_PORT = 23333
 wget https://github.com/FsHtroy/bashCollection/raw/master/Htroy/shadowsocks.service
 mv -f shadowsocks.service /usr/lib/systemd/system
 systemctl enable shadowsocks
-rm -rf /automanyuser.sh
 reboot
 }
 
