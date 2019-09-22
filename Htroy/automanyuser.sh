@@ -15,7 +15,7 @@ pip_install() {
   curl -fsSL https://bootstrap.pypa.io/get-pip.py|python
 }
 
-systemctl() {
+systemctl_firewall() {
   systemctl disable firewalld
   systemctl disable iptables
   systemctl stop firewalld
@@ -35,6 +35,6 @@ change_kernel() {
 yum_update
 yum_install
 pip_install
-systemctl
+systemctl_firewall
 write_rclocal
 change_kernel
