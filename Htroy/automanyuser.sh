@@ -33,8 +33,7 @@ change_kernel() {
 
 get_server() {
 	cd /usr/local
-	git clone https://github.com/FsHtroy/shadowsocksr-manyuser-mod.git
-	mv shadowsocksr-manyuser-mod shadowsocks
+	git clone -b manyuser https://github.com/NimaQu/shadowsocks.git
 	cd shadowsocks
 	pip install cymysql
 	pip install -r requirements.txt
