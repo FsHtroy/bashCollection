@@ -10,8 +10,8 @@ Script to set DDNS Record via [CloudFlare](https://www.cloudflare.com)
 ## download
 ```bash
 mkdir /home/CloudFlare_DDNS
-wget https://raw.githubusercontent.com/FsHtroy/bashCollection/CloudFlare_DNS_Record/Setter/config.conf -O /home/CloudFlare_DDNS/config.conf
-wget https://raw.githubusercontent.com/FsHtroy/bashCollection/CloudFlare_DNS_Record/Setter/CloudFlare_DDNS_Setter.sh
+wget https://github.com/FsHtroy/bashCollection/raw/master/CloudFlare_DNS_Record-Setter/config.conf -O /home/CloudFlare_DDNS/config.conf
+wget https://github.com/FsHtroy/bashCollection/raw/master/CloudFlare_DNS_Record-Setter/CloudFlare_DDNS_Setter.sh
 ```
 
 ## config
