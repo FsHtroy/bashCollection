@@ -48,7 +48,7 @@ check_deps(){
 		[[ ! -z "`cat /etc/redhat-release | grep -E -i "CentOS"`" ]]; then
         	yum install -y epel-release
 		yum makecache fast
-		yum install -y openssl libssl-dev ca-certificates curl python-pip jq
+		yum install -y openssl openssl-devel ca-certificates curl python-pip jq
 	else
 		echo -e "${Error} only support Debian or Ubuntu or CentOS !" && exit 1
 	fi
