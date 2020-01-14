@@ -98,6 +98,7 @@ MANAGE_BIND_IP = '127.0.0.1'
 # make sure this port is idle
 MANAGE_PORT = 23333
 " > userapiconfig.py
+	setfacl -m user:shadowsocks:rw- /etc/hosts.deny
 }
 
 install_supervisor() {
