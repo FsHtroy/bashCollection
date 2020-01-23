@@ -98,7 +98,6 @@ MANAGE_BIND_IP = '127.0.0.1'
 # make sure this port is idle
 MANAGE_PORT = 23333
 " > userapiconfig.py
-	setfacl -m user:shadowsocks:rw- /etc/hosts.deny
 }
 
 install_supervisor() {
@@ -130,6 +129,7 @@ with_supervisor_install() {
 	normal_install
 	install_supervisor
 	useradd -M -s /sbin/nologin shadowsocks
+	setfacl -m user:shadowsocks:rw- /etc/hosts.deny
 	touch /etc/supervisor/config.d/shadowsocks.ini
 	echo -e "[program:shadowsocks]
 command=python /usr/local/shadowsocks/server.py
