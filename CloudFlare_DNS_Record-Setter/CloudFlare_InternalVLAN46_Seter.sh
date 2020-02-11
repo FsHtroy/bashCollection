@@ -4,17 +4,21 @@ Info="${Green_font}[Info]${Font_suffix}"
 Error="${Red_font}[Error]${Font_suffix}"
 echo -e "${Green_font}
 #=======================================
-# Project: CloudFlare_InternalVLAN46_Seter
+# Project: CloudFlare_DDNS_Setter
 # Version: 1.0
-# Author: Htroy
+# Author: nanqinlang
 # Blog:   https://sometimesnaive.org
 # Github: https://github.com/nanqinlang
+#=======================================
+# Secondary editing by Htroy
+# Version: vlan ver
+# Github: https://github.com/FsHtroy/bashCollection
 #=======================================
 
 ${Font_suffix}"
 
 file='/home/CloudFlare_DDNS'
-ddns_conf='/home/CloudFlare_DDNS/config.conf'
+ddns_conf='/home/CloudFlare_DDNS/config_vlan46.conf'
 
 check_root(){
 	[[ "`id -u`" != "0" ]] && echo -e "${Error} must be root user !" && exit 1
@@ -35,24 +39,20 @@ check_ip_diff(){
 check_deps(){
 	if  [[ ! -z "`cat /etc/issue | grep -E -i "debian"`" ]]; then
         apt update -y
-		apt-get install -y openssl libssl-dev ca-certificates curl python-pip jq
+		apt-get install -y openssl libssl-dev ca-certificates curl
   elif
 		[[ ! -z "`cat /etc/issue | grep -E -i "ubuntu"`" ]]; then
         apt update -y
-		apt-get install -y openssl libssl-dev ca-certificates curl python-pip jq
+		apt-get install -y openssl libssl-dev ca-certificates curl
 	elif
 		[[ ! -z "`cat /etc/redhat-release | grep -E -i "CentOS"`" ]]; then
     yum install -y epel-release
 		yum makecache fast
 		yum install -y openssl openssl-devel ca-certificates curl jq
-    curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-    python get-pip.py
   elif
 		[[ ! -z "`cat /etc/issue | grep -E -i "armbian"`" ]]; then
       apt update
       apt install -y openssl libssl-dev ca-certificates curl jq
-      curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
-      python get-pip.py
 	else
 		echo -e "${Error} not support !" && exit 1
 	fi
@@ -90,7 +90,7 @@ choose_service(){
 		done
 		[[ "${service}" = "1" ]] && get_record_id
         sed -i '/CloudFlare_DDNS/d' /var/spool/cron/root
-        echo -e '*/3 * * * * bash CloudFlare_DDNS_Setter.sh --ddns' >> /var/spool/cron/root
+        echo -e '*/3 * * * * bash CloudFlare_InternalVLAN46_Seter.sh --ddns' >> /var/spool/cron/root
 		[[ "${service}" = "2" ]] && create_record
 
 	elif [[ "$1" == "--ddns" ]]; then
