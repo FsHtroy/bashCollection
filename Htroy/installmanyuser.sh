@@ -18,7 +18,6 @@ prepare() {
 	echo -e "Get base env"
 	yum update -y
 	yum install wget screen git net-tools -y
-	yum groupinstall "Development tools" -y
 	mkdir ~/manyuser_install
 	cd ~/manyuser_install
 	wget https://bootstrap.pypa.io/get-pip.py
