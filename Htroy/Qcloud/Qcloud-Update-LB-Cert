@@ -1,0 +1,62 @@
+import configparser
+import json
+import urllib.parse
+import sys
+from tencentcloud.common import credential
+from tencentcloud.common.profile.client_profile import ClientProfile
+from tencentcloud.common.profile.http_profile import HttpProfile
+from tencentcloud.common.exception.tencent_cloud_sdk_exception import TencentCloudSDKException
+from tencentcloud.ssl.v20191205 import ssl_client, models
+from tencentcloud.clb.v20180317 import clb_client
+from tencentcloud.clb.v20180317 import models as lbModels
+try:
+    cp = configparser.SafeConfigParser()
+    cp.read('API_FILE')
+    pubKey = open('PUBKEY').read().replace("\n", "\\n")
+    priKey = open('PRIKEY').read().replace("\n", "\\n")
+    cred = credential.Credential(cp.get('USER', 'SecretId'), cp.get('USER', 'SecretKey'))
+    sslCp = configparser.SafeConfigParser()
+    sslCp.read('ssl-cert')
+    oldCertId = sslCp.get('ssl', 'OldCertId')
+    httpProfile = HttpProfile()
+    httpProfile.endpoint = "ssl.tencentcloudapi.com"
+
+    clientProfile = ClientProfile()
+    clientProfile.httpProfile = httpProfile
+    client = ssl_client.SslClient(cred, "ap-guangzhou", clientProfile)
+
+
+    lbHttpProfile = HttpProfile()
+    lbHttpProfile.endpoint = "clb.tencentcloudapi.com"
+
+    lbClientProfile = ClientProfile()
+    lbClientProfile.httpProfile = lbHttpProfile
+    lbClient = clb_client.ClbClient(cred, "ap-guangzhou", lbClientProfile)
+
+    req = models.UploadCertificateRequest()
+    params = '{\"CertificatePublicKey\":\"'+pubKey+'\",\"CertificatePrivateKey\":\"'+priKey+'\",\"CertificateType\":\"SVR\",\"Alias\":\"CERT_NAME\"}'
+    req.from_json_string(params)
+
+    resp = client.UploadCertificate(req)
+    newCertId = json.loads(resp.to_json_string()).get('CertificateId')
+    print(resp.to_json_string())
+
+    req = lbModels.ReplaceCertForLoadBalancersRequest()
+    params = '{\"OldCertificateId\":\"'+oldCertId+'\",\"Certificate\":{\"SSLMode\":\"UNIDIRECTIONAL\",\"CertId\":\"'+newCertId+'\"}}'
+    req.from_json_string(params)
+
+    resp = lbClient.ReplaceCertForLoadBalancers(req)
+    print(resp.to_json_string())
+
+    req = models.DeleteCertificateRequest()
+    params = '{\"CertificateId\":\"'+oldCertId+'\"}'
+    req.from_json_string(params)
+
+    resp = client.DeleteCertificate(req)
+    print(resp.to_json_string())
+
+    sslCp.set('ssl', 'OldCertId', newCertId)
+    sslCp.write(open('ssl-cert', 'w'))
+
+except TencentCloudSDKException as err:
+    print(err)
