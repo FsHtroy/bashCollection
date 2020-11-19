@@ -30,7 +30,7 @@ install_proxychains() {
   cd ~/init/proxychains-ng
   wget http://ftp.barfooze.de/pub/sabotage/tarballs/proxychains-ng-4.14.tar.xz
   xz -d proxychains-ng-4.14.tar.xz
-  tar xvf proxychains-ng-4.14.tar.xz
+  tar xvf proxychains-ng-4.14.tar
   cd ~/init/proxychains-ng/proxychains-ng-4.14
   ~/init/proxychains-ng/proxychains-ng-4.14/configure --prefix=/usr --sysconfdir=/etc
   make
