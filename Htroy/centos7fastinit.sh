@@ -20,7 +20,7 @@ yum_install() {
 	yum update -y
   yum install wget vim screen git epel-release net-tools mtr curl traceroute telnet tcpdump nmap nc bind-utils iperf3 -y
   yum makecache fast
-  yum install bash-completion htop strongswan bird bird6 wireguard-tools -y
+  yum install bash-completion htop strongswan bird2 wireguard-tools -y
   yum groupinstall "Development tools" -y
 }
 
