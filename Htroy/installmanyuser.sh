@@ -20,7 +20,7 @@ prepare() {
 	yum install wget screen git net-tools -y
 	mkdir ~/manyuser_install
 	cd ~/manyuser_install
-	wget https://bootstrap.pypa.io/get-pip.py
+	wget https://bootstrap.pypa.io/2.7/get-pip.py
 	python get-pip.py
 }
 
