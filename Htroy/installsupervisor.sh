@@ -22,7 +22,7 @@ check_root() {
 
 install_pip() {
 	if [[ "${pip}" != "installed" ]]; then
-		curl https://bootstrap.pypa.io/2.7/get-pip.py --output get-pip.py
+		curl https://bootstrap.pypa.io/pip/2.7/get-pip.py --output get-pip.py
 		python get-pip.py
 	fi
 }
